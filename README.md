@@ -56,7 +56,7 @@ My first 'Web API Server', an assessment for Coder Academy.
 <hr>
 
 4. **Run the App**
-(ADD INFO HERE)
+(ADD INFO HERE - .env file info to add their own info in)
 
 <hr>
 
