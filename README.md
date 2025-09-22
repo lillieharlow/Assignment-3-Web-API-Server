@@ -43,7 +43,7 @@ My first 'Web API Server', an assessment for Coder Academy.
    ```
 3. **Install Dependencies**
    ```bash
-   pip install (ADD DEPENDENCIES HERE)
+   pip3 install flask psycopg2-binary flask-sqlalchemy marshmallow-sqlalchemy python-dotenv
    ```
    Or create `requirements.txt` and manually add the dependencies (recommended for consistency):
    ```
@@ -52,7 +52,7 @@ My first 'Web API Server', an assessment for Coder Academy.
    ```bash
    pip install -r requirements.txt
    ```
-   > **Note:** Sub-dependencies like (ADD SUB-DEPENDENCIES HERE) are installed automatically.
+   > **Note:** Sub-dependencies are installed automatically.
 <hr>
 
 4. **Run the App**
