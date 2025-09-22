@@ -6,9 +6,12 @@ My first 'Web API Server', an assessment for Coder Academy.
 
 ## Table of Contents
 1. [Setup & Installation](#1-setup--installation)
-   - [System Requirements](#system-requirements)
+   - [System Requirements](#1-system-requirements)
    - [Clone Repository](#clone-repository)
    - [Install Dependencies](#install-dependencies)
+   - [Prompt PostgreSQL](#prompt-postgresql)
+   - [Create Database in PostgreSQL & Connect]
+   - [Create User & Grant Permissions]
    - [Run the App](#run-the-app)
 2. [Hardware Requirements](#2-hardware-requirements)
 3. [Network Requirements](#3-network-requirements)
@@ -53,10 +56,37 @@ My first 'Web API Server', an assessment for Coder Academy.
    pip install -r requirements.txt
    ```
    > **Note:** Sub-dependencies are installed automatically.
-<hr>
+4. **Prompt PostgreSQL**
+   Mac users:
+   ```bash
+   psql -U user_name -d postgres
+   ```
+   Linus & WSL users:
+   ```bash
+   sudo -u postgres psql
+   ```
+5. **Create Database in PostgreSQL & Connect**
+   ```bash
+   CREATE DATABASE database_name;
+   ```
+   ```bash
+   \c database_name;
+   ```
+6. **Create User & Grant Permissions**
+   ```bash
+   CREATE USER user-name WITH PASSWORD 'password';
+   ```
+   ```bash
+   GRANT ALL PRIVILEGES ON DATABASE database_name TO user_name;
+   ```
+   ```bash
+   GRANT ALL ON SCHEMA public TO user_name;
+   ```
+7. **Create .env File**
 
-4. **Run the App**
-(ADD INFO HERE - .env file info to add their own info in)
+8. **Define DATABASE_URI Value**
+
+9. **Run the App**
 
 <hr>
 
