@@ -20,8 +20,8 @@ class Show(db.Model):
     # ========== Foreign Key 2 ==========
     venue_id = db.Column(
         db.Integer,
-        db.ForeignKey("venues.venue_id", ondelete = "CASCADE"),
-        nullable = False
+        db.ForeignKey("venues.venue_id", ondelete = "SET NULL"),
+        nullable = True
     )
     #singular attribute because a show can be at one and only one venue
     venue = db.relationship("Venue", back_populates = "shows")

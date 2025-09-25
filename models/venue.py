@@ -9,4 +9,4 @@ class Venue(db.Model):
     location = db.Column(db.String(100), nullable = False)
 
     # plural attribute because a venue can have many shows
-    shows = db.relationship("Show", back_populates = "venue", cascade = "all, delete-orphan")
+    shows = db.relationship("Show", back_populates = "venue")
