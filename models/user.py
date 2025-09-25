@@ -20,6 +20,6 @@ class User(db.Model):
     __table_args__ = (
         CheckConstraint(
             "length(phone_number) = 10 AND phone_number GLOB '[0-9]*'",
-            name='check_phone_number_digits'
+            name='check_phone_number_length'
             ),
     )
