@@ -16,9 +16,11 @@ class Organiser(db.Model):
     email = db.Column(db.String(100), nullable = False, unique = True)
     phone_number = db.Column(db.String(10), nullable = False, unique = True)
 
+    events = db.relationship("Event", back_populates = "organiser")
+
     __table_args__ = (
         CheckConstraint(
             "length(phone_number) = 10 AND phone_number GLOB '[0-9]*'",
             name='check_phone_number_length'
-            ),
+            )
     )
