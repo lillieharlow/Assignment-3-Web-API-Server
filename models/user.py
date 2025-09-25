@@ -23,3 +23,6 @@ class User(db.Model):
             name='check_phone_number_length'
             )
     )
+
+    # plural attribute because one user can have many bookings
+    bookings = db.relationship("Booking", back_populates = "user", cascade = "all, delete-orphan")

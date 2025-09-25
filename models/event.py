@@ -17,5 +17,5 @@ class Event(db.Model):
     # singular attribute because an event has one and only one organiser
     organiser = db.relationship("Organiser", back_populates = "events")
 
-    # plural attribute because an event can have many shows
+    # plural attribute because one event can have many shows
     shows = db.relationship("Show", back_populates = "event", cascade = "all, delete-orphan")

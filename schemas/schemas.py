@@ -6,12 +6,15 @@ from models.organiser import Organiser
 from models.venue import Venue
 from models.event import Event
 from models.show import Show
+from models.booking import Booking
 
 # ========== User Schema ==========
 class UserSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = User
         load_instance = True
+    
+    bookings = fields.List(fields.Nested("BookingSchema", exclude = ("user", "user_id")))
 
 user_schema = UserSchema()
 users_schema = UserSchema(many = True)
@@ -52,8 +55,7 @@ class EventSchema(SQLAlchemyAutoSchema):
             )
     
     shows = fields.List(fields.Nested("ShowSchema", exclude = ("show_id", "event")))
-
-    organiser = fields.Nested("OrganiserSchema", dump_only = True, only = ("full_name"))
+    organiser = fields.Nested("OrganiserSchema", dump_only = True, only = ("full_name",))
 
 event_schema = EventSchema()
 events_schema = EventSchema(many = True)
@@ -72,8 +74,29 @@ class ShowSchema(SQLAlchemyAutoSchema):
             "venue_id"
         )
     
-    event = fields.Nested("EventSchema", dump_only = True, only = ("title"))
-    venue = fields.Nested("VenueSchema", dump_only = True, only = ("name"))
+    bookings = fields.List(fields.Nested("BookingSchema", exclude = ("show", "show_id")))
+    event = fields.Nested("EventSchema", dump_only = True, only = ("title",))
+    venue = fields.Nested("VenueSchema", dump_only = True, only = ("name", "location"))
 
 show_schema = ShowSchema()
 shows_schema = ShowSchema(many = True)
+
+# ========== Booking Schema ==========
+class BookingSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Booking
+        load_instance = True
+        include_fk = True
+        fields = (
+            "booking_id",
+            "booking_date",
+            "booking_status",
+            "user_id",
+            "show_id"
+        )
+    
+    user = fields.Nested("UserSchema", dump_only = True, only = ("first_name", "last_name"))
+    show = fields.Nested("ShowSchema", dump_only = True, only = ("date_time", "event", "venue"))
+
+booking_schema = BookingSchema()
+bookings_schema = BookingSchema(many = True)

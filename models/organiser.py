@@ -16,7 +16,7 @@ class Organiser(db.Model):
     email = db.Column(db.String(100), nullable = False, unique = True)
     phone_number = db.Column(db.String(10), nullable = False, unique = True)
 
-    # plural attribute because an organiser can have many events
+    # plural attribute because one organiser can have many events
     events = db.relationship("Event", back_populates = "organiser")
 
     __table_args__ = (

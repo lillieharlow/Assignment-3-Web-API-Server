@@ -25,3 +25,6 @@ class Show(db.Model):
     )
     #singular attribute because a show can be at one and only one venue
     venue = db.relationship("Venue", back_populates = "shows")
+
+    # plural attribute because one show can have many bookings
+    bookings = db.relationship("Booking", back_populates = "show")
