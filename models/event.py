@@ -10,7 +10,9 @@ class Event(db.Model):
     
     organiser_id = db.Column(
         db.Integer,
-        db.ForeignKey("organisers.organier_id", ondelete = "SET NULL"),
+        db.ForeignKey("organisers.organiser_id", ondelete = "SET NULL"),
         nullable = True
         )
+    
+    # singlular attribute because an event has one and only one organiser
     organiser = db.relationship("Organiser", back_populates = "events")
