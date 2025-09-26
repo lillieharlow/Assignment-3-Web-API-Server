@@ -5,7 +5,7 @@ class Show(db.Model):
     __tablename__ = "shows"
 
     show_id = db.Column(db.Integer, primary_key = True)
-    duration = db.Column(db.Float)
+    duration_hours = db.Column(db.Float)
     date_time = db.Column(db.DateTime, nullable = False, unique = True)
 
     # ========== Foreign Key 1 ==========

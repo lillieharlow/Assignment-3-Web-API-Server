@@ -7,7 +7,7 @@ from models.organiser import Organiser
 from models.venue import Venue
 from models.event import Event
 from models.show import Show
-from models.booking import Booking
+from models.booking import Booking, BookingStatus
 
 db_commands = Blueprint("db", __name__)
 
@@ -103,27 +103,27 @@ When BADLANDS was first released on August 28, 2015, it catapulted Halsey into m
 # ========== Seed Shows ==========
 def seed_shows_table():
     shows = [Show(
-        duration = 2.25,
+        duration_hours = 2.25,
         date_time = datetime.strptime("8-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        duration = 2.25,
+        duration_hours = 2.25,
         date_time = datetime.strptime("9-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        duration = 2.25,
+        duration_hours = 2.25,
         date_time = datetime.strptime("11-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        duration = 2.5,
+        duration_hours = 2.5,
         date_time = datetime.strptime("13-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        duration = 2.5,
+        duration_hours = 2.5,
         date_time = datetime.strptime("14-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id
@@ -134,7 +134,27 @@ def seed_shows_table():
 
 # ========== Seed Bookings ==========
 def seed_bookings_table():
-    bookings = [Booking(), Booking(), Booking(), Booking()]
+    bookings = [Booking(
+        booking_date = datetime.strptime("16-09-2025", "%d-%m-%Y"),
+        booking_status = BookingStatus.CONFIRMED,
+        user_id = users[0].user_id,
+        show_id = shows[4].show_id
+    ), Booking(
+        booking_date = datetime.strptime("16-09-2025", "%d-%m-%Y"),
+        booking_status = BookingStatus.CONFIRMED,
+        user_id = users[1].user_id,
+        show_id = shows[3].show_id
+    ), Booking(
+        booking_date = datetime.strptime("25-09-2025", "%d-%m-%Y"),
+        booking_status = BookingStatus.PENDING,
+        user_id = users[3].user_id,
+        show_id = shows[0].show_id
+    ), Booking(
+        booking_date = datetime.strptime("30-08-2025", "%d-%m-%Y"),
+        booking_status = BookingStatus.CONFIRMED,
+        user_id = users[2].user_id,
+        show_id = shows[2].show_id
+    )]
 
     db.session.add_all(bookings)
     db.session.commit()
