@@ -1,6 +1,8 @@
 import enum
+
 from sqlalchemy.types import Enum
 from sqlalchemy.orm import Session
+
 from init import db
 
 # Define set values for booking_status column of booking table.
