@@ -19,9 +19,9 @@ class User(db.Model):
 
     __table_args__ = (
         CheckConstraint(
-            "length(phone_number) = 10 AND phone_number GLOB '[0-9]*'",
+            "length(phone_number) = 10 AND phone_number ~ '^[0-9]+$'",
             name='check_phone_number_length'
-            )
+            ), # comma needed to make it a tuple
     )
 
     # plural attribute because one user can have many bookings
