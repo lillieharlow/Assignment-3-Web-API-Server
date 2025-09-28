@@ -7,6 +7,7 @@ class Event(db.Model):
     event_id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(100), nullable = False, unique = True)
     description = db.Column(db.Text)
+    duration_hours = db.Column(db.Float)
     
     # ========== Foreign Key ==========
     organiser_id = db.Column(

@@ -86,6 +86,7 @@ def seed_events_table():
 Linkin Park made their triumphant return to the spotlight with "The Emptiness Machine," which surged to #1 on both the Billboard Alternative and Mainstream Rock Airplay charts, marking their 13th and 11th chart-toppers on these lists, respectively. The song also debuted at #4 on the UK Singles Chart, achieving the band’s highest UK chart position in their 24-year career.
 
 With over 54 million monthly listeners on Spotify and accolades from Billboard, The New York Times, and The Los Angeles Times on their recent singles, Linkin Park’s comeback has proven they are more influential than ever. Their timeless appeal, and their latest music has struck a powerful chord, propelling them to the forefront of rock music once again.""",
+        duration_hours = 2.25,
         organiser_id = organisers[0].organiser_id
     ), Event(
         title = "Halsey: For My Last Trick",
@@ -94,6 +95,7 @@ With over 54 million monthly listeners on Spotify and accolades from Billboard, 
 The new tour announce arrives on the heels of Halsey wrapping her “FOR MY LAST TRICK,” tour, which was the best selling tour of her career, with Variety branding the tour as “one of the most ambitious pop tours of the year.”
 
 When BADLANDS was first released on August 28, 2015, it catapulted Halsey into music history. Since its release the album has sold over 3 Million albums-adjusted in the US, and has accumulated over 9 Billion on-demand streams worldwide. It is one of the only albums in music history to have every song, RIAA certified gold, platinum or multi-platinum. As well as multiple certifications in other countries including the UK, and Australia.""",
+        duration_hours = 2.5,
         organiser_id = organisers[1].organiser_id
     )]
 
@@ -103,27 +105,22 @@ When BADLANDS was first released on August 28, 2015, it catapulted Halsey into m
 # ========== Seed Shows ==========
 def seed_shows_table():
     shows = [Show(
-        duration_hours = 2.25,
         date_time = datetime.strptime("8-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        duration_hours = 2.25,
         date_time = datetime.strptime("9-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        duration_hours = 2.25,
         date_time = datetime.strptime("11-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        duration_hours = 2.5,
         date_time = datetime.strptime("13-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        duration_hours = 2.5,
         date_time = datetime.strptime("14-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id

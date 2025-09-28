@@ -51,6 +51,7 @@ class EventSchema(SQLAlchemyAutoSchema):
             "event_id",
             "title",
             "description",
+            "duration_hours",
             "organiser_id"
             )
     
@@ -68,7 +69,6 @@ class ShowSchema(SQLAlchemyAutoSchema):
         include_fk = True
         fields = (
             "show_id",
-            "duration_hours",
             "date_time",
             "event_id",
             "venue_id"
