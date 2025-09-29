@@ -14,7 +14,7 @@ class UserSchema(SQLAlchemyAutoSchema):
         model = User
         load_instance = True
     
-    bookings = fields.List(fields.Nested("BookingSchema", exclude = ("user", "user_id")))
+    #bookings = fields.List(fields.Nested("BookingSchema", exclude = ("user", "user_id")))
 
 user_schema = UserSchema()
 users_schema = UserSchema(many = True)
