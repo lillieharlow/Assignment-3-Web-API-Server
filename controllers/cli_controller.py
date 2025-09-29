@@ -22,8 +22,8 @@ def drop_tables():
     print("Tables dropped.")
 
 @db_commands.cli.command("seed")
-# ========== Seed Users ==========
-def seed_users_table():
+def seed_tables():
+    # ========== Seed Users ==========
     users = [User(
         first_name = "Bobby",
         last_name = "Mac Manus",
@@ -49,8 +49,7 @@ def seed_users_table():
     db.session.add_all(users)
     db.session.commit()
 
-# ========== Seed Organisers ==========
-def seed_organisers_table():
+    # ========== Seed Organisers ==========
     organisers = [Organiser(
         full_name = "Johnnie Marks",
         email = "johnnie@email.com",
@@ -58,14 +57,13 @@ def seed_organisers_table():
     ), Organiser(
         full_name = "Georgia Pierce-allen",
         email = "georgia@email.com",
-        phone_number = "08889765432"
+        phone_number = "0888976543"
     )]
 
     db.session.add_all(organisers)
     db.session.commit()
 
-# ========== Seed Venues ==========
-def seed_venues_table():
+    # ========== Seed Venues ==========
     venues = [Venue(
         name = "Rod Laver Arena",
         location = "200 Batman Ave, Melbourne VIC 3004"
@@ -77,8 +75,7 @@ def seed_venues_table():
     db.session.add_all(venues)
     db.session.commit()
 
-# ========== Seed Events ==========
-def seed_events_table():
+    # ========== Seed Events ==========
     events = [Event(
         title = "Linkin Park: From Zero World Tour",
         description = """The band will perform both new hits like “The Emptiness Machine” and “Heavy Is The Crown” alongside iconic anthems spanning their 20+ year career. Following the release of “Heavy Is The Crown”, the official League of Legends World Championship Anthem and their first collaboration with Riot Games, Linkin Park reasserted their position as one of rock’s defining voices. The song’s hard-hitting rhythm and anthemic energy embody the bold, renewed spirit of the band, resonating with fans across the globe and paving the way for From Zero.
@@ -102,8 +99,7 @@ When BADLANDS was first released on August 28, 2015, it catapulted Halsey into m
     db.session.add_all(events)
     db.session.commit()
 
-# ========== Seed Shows ==========
-def seed_shows_table():
+    # ========== Seed Shows ==========
     shows = [Show(
         date_time = datetime.strptime("8-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
         event_id = events[0].event_id,
@@ -129,8 +125,7 @@ def seed_shows_table():
     db.session.add_all(shows)
     db.session.commit()
 
-# ========== Seed Bookings ==========
-def seed_bookings_table():
+    # ========== Seed Bookings ==========
     bookings = [Booking(
         booking_date = datetime.strptime("16-09-2025", "%d-%m-%Y"),
         booking_status = BookingStatus.CONFIRMED,
@@ -155,3 +150,5 @@ def seed_bookings_table():
 
     db.session.add_all(bookings)
     db.session.commit()
+
+    print("Tables seeded.")
