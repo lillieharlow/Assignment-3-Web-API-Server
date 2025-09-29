@@ -8,7 +8,6 @@ from schemas.schemas import user_schema, users_schema
 
 users_bp = Blueprint("users", __name__, url_prefix = "/users")
 
-# Define routes for user operations
 # GET / (get all users)
 @users_bp.route("/")
 def get_users():
@@ -42,3 +41,8 @@ def create_a_user():
     db.session.add(new_user)
     db.session.commit()
     return user_schema.dump(new_user), 201
+
+# PATCH/PUT /id (update user by id)
+@users_bp.route("/<int:user_id>")
+def update_a_user(user_id):
+    

@@ -1,4 +1,4 @@
-# TDD for API endpoints:
+# TDD for API endpoints on user.py:
 
 # GET /users
 # Expected response: 200 OK and a list
@@ -22,3 +22,15 @@ def test_create_user_success(client):
     user = response.get_json()
     assert 'id' in user
     assert user['email'] == "john@email.com"
+
+"""# PATCH/PUT /users/<user_id>
+# Expected response: 200 OK, JSON response
+def test_update_user_success(client):
+    user_id = 1
+    update_data = {
+        "first_name": "Test",
+        "last_name": "User",
+    }
+    response = client.patch(f'/users/{user_id}', json = update_data)
+    assert response.status_code == 200"""
+    
