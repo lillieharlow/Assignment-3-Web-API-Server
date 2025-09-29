@@ -1,5 +1,5 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from marshmallow import fields
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
+from marshmallow import fields, ValidationError, validate, validates
 
 from models.user import User
 from models.organiser import Organiser
@@ -13,9 +13,11 @@ class UserSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = User
         load_instance = True
+        include_relationships = True
+        fields = ("user_id", "first_name", "last_name", "email", "phone_number", "bookings")
     
-    #bookings = fields.List(fields.Nested("BookingSchema", exclude = ("user", "user_id")))
-
+    bookings = fields.List(fields.Nested("BookingNestedSchema"))
+    
 user_schema = UserSchema()
 users_schema = UserSchema(many = True)
 
@@ -87,6 +89,7 @@ class BookingSchema(SQLAlchemyAutoSchema):
         model = Booking
         load_instance = True
         include_fk = True
+        include_relationships = True
         fields = (
             "booking_id",
             "booking_date",
@@ -100,3 +103,16 @@ class BookingSchema(SQLAlchemyAutoSchema):
 
 booking_schema = BookingSchema()
 bookings_schema = BookingSchema(many = True)
+
+class BookingNestedSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Booking
+        load_instance = True
+        include_fk = True
+        fields = (
+            "show_id",
+            "booking_date",
+            "booking_status",
+        )
+    
+    booking_date = fields.DateTime(format = "%d-%m-%Y")

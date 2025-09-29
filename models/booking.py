@@ -12,8 +12,6 @@ class BookingStatus(enum.Enum):
     IN_PROGRESS = "In Progress"
     PENDING = "Pending"
 
-# 
-
 class Booking(db.Model):
     # Booking model represents booking table.
     __tablename__ = "bookings"

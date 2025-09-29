@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from dotenv import load_dotenv
 
 from init import db
 from controllers.cli_controller import db_commands
@@ -11,6 +12,7 @@ from controllers.event_controller import events_bp
 from controllers.show_controller import shows_bp
 from controllers.booking_controller import bookings_bp
 
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)

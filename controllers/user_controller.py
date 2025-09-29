@@ -16,7 +16,7 @@ def get_users():
     users_list = db.session.scalars(stmt)
     data = users_schema.dump(users_list)
     if data:
-        return jsonify([]), 200
+        return jsonify(data), 200
     else:
         return {"message": "No users found. Please add a user to get started."}, 404
 
