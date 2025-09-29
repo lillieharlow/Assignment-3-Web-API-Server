@@ -41,6 +41,4 @@ def create_a_user():
     )
     db.session.add(new_user)
     db.session.commit()
-    data = user_schema.dump(new_user)
-    data['id'] = new_user.user_id  # Add 'id' key for test compatibility
-    return jsonify(data), 201
+    return user_schema.dump(new_user), 201
