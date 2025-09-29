@@ -19,21 +19,11 @@ class Booking(db.Model):
     booking_id = db.Column(db.Integer, primary_key = True)
     booking_date = db.Column(db.DateTime, nullable = False)
     booking_status = db.Column(Enum(BookingStatus), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable = False)
+    show_id = db.Column(db.Integer, db.ForeignKey("shows.show_id"), nullable = True)
 
-    # ========== Foreign Key 1 ==========
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.user_id", ondelete = "CASCADE"),
-        nullable = False
-    )
     # singular attribute because one booking has one and only one user
     user = db.relationship("User", back_populates = "bookings")
 
-    # ========== Foreign Key 2 ==========
-    show_id = db.Column(
-        db.Integer,
-        db.ForeignKey("shows.show_id"),
-        nullable = True
-    )
     # singular attribute because one booking is for one and only one show
     show = db.relationship("Show", back_populates = "bookings")
