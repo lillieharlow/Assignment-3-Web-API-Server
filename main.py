@@ -18,7 +18,7 @@ def create_app():
     app = Flask(__name__)
     print("Flask server started.")
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URI")
-    app.json.sort_keys = False
+    app.json.sort_keys = False # keep order of keys in JSON
     db.init_app(app)
     app.register_blueprint(db_commands)
     app.register_blueprint(users_bp)

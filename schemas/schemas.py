@@ -54,7 +54,7 @@ class EventSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
         include_relationships = True
-        fields = ("event_id", "title", "description", "duration_hours", "organiser_id", "show", "organiser")
+        fields = ("event_id", "title", "description", "duration_hours", "organiser_id", "shows", "organiser")
     
     shows = fields.List(fields.Nested("ShowSchema", exclude = ("show_id", "event")))
     organiser = fields.Nested("OrganiserSchema", dump_only = True, only = ("full_name",))
@@ -71,9 +71,9 @@ class ShowSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         fields = ("show_id", "date_time", "event_id", "venue_id", "bookings", "event", "venue")
     
-    bookings = fields.List(fields.Nested("BookingSchema", exclude = ("show", "show_id")))
     event = fields.Nested("EventSchema", dump_only = True, only = ("title",))
     venue = fields.Nested("VenueSchema", dump_only = True, only = ("name", "location"))
+    bookings = fields.List(fields.Nested("BookingSchema", exclude = ("show", "show_id")))
 
 show_schema = ShowSchema()
 shows_schema = ShowSchema(many = True)
