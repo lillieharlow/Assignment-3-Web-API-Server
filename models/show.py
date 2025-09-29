@@ -1,7 +1,11 @@
 from init import db
+from datetime import datetime
 
 class Show(db.Model):
     __tablename__ = "shows"
+    __table_args__ = (
+        db.UniqueConstraint("event_id", "venue_id", name = "booking_unique_event_venue"),
+    )
 
     show_id = db.Column(db.Integer, primary_key = True)
     date_time = db.Column(db.DateTime, nullable = False, unique = True)

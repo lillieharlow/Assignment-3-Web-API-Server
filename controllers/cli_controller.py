@@ -101,23 +101,23 @@ When BADLANDS was first released on August 28, 2015, it catapulted Halsey into m
 
     # ========== Seed Shows ==========
     shows = [Show(
-        date_time = datetime.strptime("8-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
+        date_time = datetime.strptime("8-3-2026 | 7:00 PM", "%-d-%-m-%Y | %-I:%M %p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        date_time = datetime.strptime("9-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
+        date_time = datetime.strptime("9-3-2026 7:00PM", "%-d-%-m-%Y | %-I:%M %p"),
         event_id = events[0].event_id,
         venue_id = venues[0].venue_id
     ), Show(
-        date_time = datetime.strptime("11-3-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
+        date_time = datetime.strptime("11-3-2026 7:00PM", "%-d-%-m-%Y | %-I:%M %p"),
         event_id = events[0].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        date_time = datetime.strptime("13-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
+        date_time = datetime.strptime("13-2-2026 7:00PM", "%-d-%-m-%Y | %-I:%M %p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id
     ), Show(
-        date_time = datetime.strptime("14-2-2026 7:00PM", "%d-%m-%Y %I:%M%p"),
+        date_time = datetime.strptime("14-2-2026 7:00PM", "%-d-%-m-%Y | %-I:%M %p"),
         event_id = events[1].event_id,
         venue_id = venues[1].venue_id
     )]

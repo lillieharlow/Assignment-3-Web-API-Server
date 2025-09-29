@@ -1,7 +1,7 @@
 import enum
 
+from datetime import date
 from sqlalchemy.types import Enum
-from sqlalchemy.orm import Session
 
 from init import db
 
@@ -13,11 +13,13 @@ class BookingStatus(enum.Enum):
     PENDING = "Pending"
 
 class Booking(db.Model):
-    # Booking model represents booking table.
     __tablename__ = "bookings"
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "show_id", name = "booking_unique_user_show"),
+    )
 
     booking_id = db.Column(db.Integer, primary_key = True)
-    booking_date = db.Column(db.DateTime, nullable = False)
+    booking_date = db.Column(db.Date, default = date.today, nullable = False)
     booking_status = db.Column(Enum(BookingStatus), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable = False)
     show_id = db.Column(db.Integer, db.ForeignKey("shows.show_id"), nullable = False)
