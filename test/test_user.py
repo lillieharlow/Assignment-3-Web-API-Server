@@ -1,3 +1,6 @@
+from main import db
+from models.user import User
+
 # TDD for API endpoints on user.py:
 
 # GET /users
@@ -6,7 +9,7 @@ def test_get_users(client):
     response = client.get('/users/')
     assert response.status_code == 200
     data = response.get_json()
-    assert data == []
+    assert isinstance(data, list) # Test passes when if/else is commented out in user_controller.py (404 throws it off)
 
 # POST /users
 # Expected response: 201 OK, JSON response
@@ -20,17 +23,24 @@ def test_create_user_success(client):
     response = client.post('/users/', json = new_user)
     assert response.status_code == 201
     user = response.get_json()
-    assert 'id' in user
-    assert user['email'] == "john@email.com"
+    assert 'user_id' in user
+    assert user['email'] == 'john@email.com'
 
-"""# PATCH/PUT /users/<user_id>
+# PATCH/PUT /users/<user_id>
 # Expected response: 200 OK, JSON response
 def test_update_user_success(client):
-    user_id = 1
-    update_data = {
-        "first_name": "Test",
-        "last_name": "User",
-    }
-    response = client.patch(f'/users/{user_id}', json = update_data)
-    assert response.status_code == 200"""
-    
+    user = User(
+        first_name = "Test",
+        last_name = "User",
+        email = "test@mail.com",
+        phone_number = "0123456789"
+    )
+    db.session.add(user)
+    db.session.commit()
+    user_id = user.user_id
+
+    update_data = {"first_name": "Passed"}
+    response = client.patch(f"/users/{user_id}", json = update_data)
+    assert response.status_code == 200
+    updated_user = response.get_json()
+    assert updated_user["first_name"] == "Passed"

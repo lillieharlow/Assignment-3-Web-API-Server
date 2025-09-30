@@ -6,7 +6,6 @@ class User(db.Model):
     __table_args__ = (
         CheckConstraint("length(phone_number) = 10", name='check_phone_number_length'), # comma needed to make it a tuple
     )
-
     user_id = db.Column(db.Integer, primary_key = True)
     first_name = db.Column(db.String(20), nullable = False)
     last_name = db.Column(db.String(30), nullable = False)
