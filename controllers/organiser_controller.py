@@ -7,3 +7,26 @@ from models.organiser import Organiser
 from schemas.schemas import organiser_schema, organisers_schema
 
 organisers_bp = Blueprint("organisers", __name__, url_prefix = "/organisers")
+
+# GET / (get all organisers)
+@organisers_bp.route("/", methods = ["GET"])
+def get_organisers():
+    stmt = db.select(Organiser)
+    organisers_list = db.session.scalars(stmt)
+    data = organisers_schema.dump(organisers_list)
+    if data:
+        return jsonify(data), 200
+    else:
+        return {"message": f"No organisers found. Please add an organiser to get started."}, 404
+        
+# GET /id (get one organiser by id)
+@organisers_bp.route("/<int:organiser_id>", methods = ["GET"])
+def get_one_organiser(organiser_id):
+    stmt = db.select(Organiser).where(Organiser.organiser_id == organiser_id)
+    organiser = db.session.scalar(stmt)
+    data = organiser_schema.dump(organiser)
+    if data:
+        return jsonify(data), 200
+    else:
+        return {"message": f"Organiser with id: {organiser_id} doesn't exist."}, 404
+    
