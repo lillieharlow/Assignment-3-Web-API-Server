@@ -30,3 +30,15 @@ def get_one_organiser(organiser_id):
     else:
         return {"message": f"Organiser with id: {organiser_id} doesn't exist."}, 404
     
+# POST / (create a new organiser)
+@organisers_bp.route("/", methods = ["POST"])
+def create_a_organiser():
+    body_data = request.get_json()
+    new_organiser = organiser_schema.load(
+        body_data,
+        session = db.session
+    )
+    db.session.add(new_organiser)
+    db.session.commit()
+    return organiser_schema.dump(new_organiser), 201
+
