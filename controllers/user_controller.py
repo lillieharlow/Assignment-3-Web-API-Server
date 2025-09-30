@@ -65,3 +65,15 @@ def update_a_user(user_id):
         return {"message": "Integrity error: likely a duplicate entry or invalid Foreign Key."}, 409
     except DataError as e:
         return {"message": "Data error: e.orig.diag.message_primary}."}, 400
+    
+# DELETE /id (delete user by id)
+@users_bp.route("/<int:user_id>", methods = ["DELETE"])
+def delete_a_user(user_id):
+    stmt = db.select(User).where(User.user_id == user_id)
+    user = db.session.scalar(stmt)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return {"message": f"User with {user_id} id has been deleted."}, 200
+    else:
+        return {"message": f"User with {user_id} id doesn't exist."}, 404
