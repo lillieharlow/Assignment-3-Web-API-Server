@@ -18,6 +18,12 @@ class UserSchema(SQLAlchemyAutoSchema):
     
     bookings = fields.List(fields.Nested("BookingSchema", exclude = ("user", "booking_id", "booking_date", "user_id", "show_id")))
     
+    phone_number = fields.Str(required=True)
+    @validates("phone_number")
+    def validate_phone_number(self, value, **kwargs):
+        if not value.isdigit() or len(value) != 10:
+            raise ValidationError("Phone number must be exactly 10 digits.")
+    
 user_schema = UserSchema()
 users_schema = UserSchema(many = True)
 
@@ -30,6 +36,12 @@ class OrganiserSchema(SQLAlchemyAutoSchema):
         fields = ("organiser_id", "full_name", "email", "phone_number", "events")
 
     events = fields.List(fields.Nested("EventSchema", exclude = ("organiser", "organiser_id")))
+
+    phone_number = fields.Str(required=True)
+    @validates("phone_number")
+    def validate_phone_number(self, value, **kwargs):
+        if not value.isdigit() or len(value) != 10:
+            raise ValidationError("Phone number must be exactly 10 digits.")
 
 organiser_schema = OrganiserSchema()
 organisers_schema = OrganiserSchema(many = True)
