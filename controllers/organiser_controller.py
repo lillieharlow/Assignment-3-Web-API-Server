@@ -29,7 +29,7 @@ def get_one_organiser(organiser_id):
     if data:
         return jsonify(data), 200
     else:
-        return {"message": f"Organiser with id: {organiser_id} doesn't exist."}, 404
+        return {"message": f"Organiser with id {organiser_id} doesn't exist."}, 404
     
 # POST / (create a new organiser)
 @organisers_bp.route("/", methods = ["POST"])
@@ -49,7 +49,7 @@ def update_a_organiser(organiser_id):
     stmt = db.select(Organiser).where(Organiser.organiser_id == organiser_id)
     organiser = db.session.scalar(stmt)
     if not organiser:
-        return {"message": f"Organiser with {organiser_id} id doesn't exist."}, 404
+        return {"message": f"Organiser with id {organiser_id} doesn't exist."}, 404
     try:
         update_organiser = organiser_schema.load(
             request.get_json(),
@@ -74,6 +74,6 @@ def delete_a_organiser(organiser_id):
     if organiser:
         db.session.delete(organiser)
         db.session.commit()
-        return {"message": f"User with {organiser_id} id has been deleted."}, 200
+        return {"message": f"Organiser with id {organiser_id} has been deleted."}, 200
     else:
-        return {"message": f"User with {organiser_id} id doesn't exist."}, 404
+        return {"message": f"Organiser with id {organiser_id} doesn't exist."}, 404

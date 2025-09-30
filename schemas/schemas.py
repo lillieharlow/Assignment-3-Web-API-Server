@@ -35,7 +35,7 @@ class OrganiserSchema(SQLAlchemyAutoSchema):
         incdue_relationships = True
         fields = ("organiser_id", "full_name", "email", "phone_number", "events")
 
-    events = fields.List(fields.Nested("EventSchema", exclude = ("organiser", "organiser_id")))
+    events = fields.List(fields.Nested("EventSchema", only = ("event_id", "title")))
 
     phone_number = fields.Str(required=True)
     @validates("phone_number")

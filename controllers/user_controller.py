@@ -29,7 +29,7 @@ def get_one_user(user_id):
     if data:
         return jsonify(data), 200
     else:
-        return {"message": f"User with id: {user_id} doesn't exist."}, 404
+        return {"message": f"User with id {user_id} doesn't exist."}, 404
 
 # POST / (create a new user)
 @users_bp.route("/", methods = ["POST"])
@@ -49,7 +49,7 @@ def update_a_user(user_id):
     stmt = db.select(User).where(User.user_id == user_id)
     user = db.session.scalar(stmt)
     if not user:
-        return {"message": f"User with {user_id} id doesn't exist."}, 404
+        return {"message": f"User with id {user_id} doesn't exist."}, 404
     try:
         update_user = user_schema.load(
             request.get_json(),
@@ -74,6 +74,6 @@ def delete_a_user(user_id):
     if user:
         db.session.delete(user)
         db.session.commit()
-        return {"message": f"User with {user_id} id has been deleted."}, 200
+        return {"message": f"User with id {user_id} has been deleted."}, 200
     else:
-        return {"message": f"User with {user_id} id doesn't exist."}, 404
+        return {"message": f"User with id {user_id} doesn't exist."}, 404
