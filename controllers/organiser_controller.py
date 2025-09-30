@@ -65,3 +65,15 @@ def update_a_organiser(organiser_id):
         return {"message": "Integrity error: likely a duplicate entry or invalid Foreign Key."}, 409
     except DataError as e:
         return {"message": "Data error: e.orig.diag.message_primary}."}, 400
+
+# DELETE /id (delete organiser by id)
+@organisers_bp.route("/<int:organiser_id>", methods = ["DELETE"])
+def delete_a_organiser(organiser_id):
+    stmt = db.select(Organiser).where(Organiser.organiser_id == organiser_id)
+    organiser = db.session.scalar(stmt)
+    if organiser:
+        db.session.delete(organiser)
+        db.session.commit()
+        return {"message": f"User with {organiser_id} id has been deleted."}, 200
+    else:
+        return {"message": f"User with {organiser_id} id doesn't exist."}, 404
