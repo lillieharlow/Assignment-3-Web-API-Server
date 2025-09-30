@@ -4,7 +4,7 @@ from sqlalchemy import CheckConstraint
 class Organiser(db.Model):
     __tablename__ = "organisers"
     __table_args__ = (
-        CheckConstraint("length(phone_number) = 10", name='check_phone_number_length'), # comma needed to make it a tuple
+        CheckConstraint("phone_number ~ '^[0-9]{10}$'", name='check_phone_number_length_digits'), # comma needed to make it a tuple
     )
 
     organiser_id = db.Column(db.Integer, primary_key = True)
