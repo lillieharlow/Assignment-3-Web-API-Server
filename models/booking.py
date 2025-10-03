@@ -20,7 +20,7 @@ class Booking(db.Model):
 
     booking_id = db.Column(db.Integer, primary_key = True)
     booking_date = db.Column(db.Date, default = date.today, nullable = False)
-    booking_status = db.Column(Enum(BookingStatus), nullable = False)
+    booking_status = db.Column(Enum(BookingStatus), nullable = False, default = BookingStatus.PENDING)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable = False)
     show_id = db.Column(db.Integer, db.ForeignKey("shows.show_id"), nullable = False)
 
