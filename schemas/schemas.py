@@ -66,10 +66,10 @@ class EventSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
         include_relationships = True
-        fields = ("event_id", "title", "description", "duration_hours", "organiser_id", "shows", "organiser")
+        fields = ("event_id", "title", "description", "duration_hours", "shows", "organiser")
     
-    shows = fields.List(fields.Nested("ShowSchema", exclude = ("show_id", "event")))
-    organiser = fields.Nested("OrganiserSchema", dump_only = True, only = ("full_name",))
+    shows = fields.List(fields.Nested("ShowSchema", only = ("show_id", "date_time", "venue_id")))
+    organiser = fields.Nested("OrganiserSchema", dump_only = True, only = ("organiser_id",))
 
 event_schema = EventSchema()
 events_schema = EventSchema(many = True)
