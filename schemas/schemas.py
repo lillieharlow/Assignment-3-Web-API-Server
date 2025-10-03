@@ -54,7 +54,7 @@ class VenueSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         fields = ("venue_id", "name", "location", "shows")
     
-    shows = fields.List(fields.Nested("ShowSchema", exclude = ("venue", "show_id")))
+    shows = fields.List(fields.Nested("ShowSchema", only = ("show_id", "date_time")))
 
 venue_schema = VenueSchema()
 venues_schema = VenueSchema(many = True)
